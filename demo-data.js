@@ -5,7 +5,7 @@ window.KEZ_IMG_BASE = "img/";
 window.KEZ_CONFIG = {
   "title": "STUDIO — Infinite Canvas Portfolio",
   "imgBase": "img/",
-  "contactEmail": "hello@example.com",
+  "contactEmail": "kezilac.works@gmail.com",
   "githubUser": "",
   "features": {
     "github": false,
@@ -340,12 +340,11 @@ window.KEZ_DATA = [
             "variant": "image",
             "id": "lm-01",
             "title": "Lumen Console — overview",
-            "meta": "https://example.com/lumen-console",
+            "meta": "2024 · Product UI",
             "aspect": "16:10",
             "ph": "screenshot · 16:10",
             "body": "A monitoring console for an imagined fleet operator. Dense tables, one accent, no decoration.",
-            "src": "lumen-console-01.webp",
-            "href": "https://example.com/lumen-console"
+            "src": "lumen-console-01.webp"
           },
           {
             "type": "card",
@@ -373,14 +372,13 @@ window.KEZ_DATA = [
             "type": "card",
             "variant": "link",
             "id": "lm-04",
-            "title": "lumen-tokens",
-            "meta": "design tokens",
+            "title": "Infinite Canvas Folio",
+            "meta": "2026 · Live demo",
             "aspect": "16:10",
-            "ph": "repo · 16:10",
+            "ph": "live template · 16:10",
             "body": "",
             "src": "lumen-tokens.webp",
-            "gh": "https://example.com/lumen-tokens",
-            "live": "https://example.com/lumen-tokens/docs"
+            "href": "https://kezworks.sixshop.site/"
           }
         ]
       },

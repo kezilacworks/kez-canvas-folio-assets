@@ -2,22 +2,23 @@
 
 /* ===== WEBFONTS ===== */
 /* 본문 sans — Paperlogy (한글 전체 포함) */
-@font-face{font-family:'Paperlogy';src:url('fonts/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'Paperlogy';src:url('fonts/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:'Paperlogy';src:url('fonts/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:'Paperlogy';src:url('fonts/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'KezPaperlogy';src:url('fonts/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'KezPaperlogy';src:url('fonts/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'KezPaperlogy';src:url('fonts/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'KezPaperlogy';src:url('fonts/Paperlogy-7Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 /* 장식 mono — Mona(모나체, SIL OFL 1.1 / Monad ABXY). 픽셀 폰트: upm 1000 = 10px 설계.
    라틴·기호만 서브셋했으므로 한글은 스택 다음의 Paperlogy로 폴백된다. */
-@font-face{font-family:'Mona';src:url('fonts/Mona10.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'Mona';src:url('fonts/Mona10-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'KezMona';src:url('fonts/Mona10.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'KezMona';src:url('fonts/Mona10-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
-:root{
+/* 모든 토큰은 캔버스 루트 안에서만 유효하다. 식스샵의 :root와 다른 블록을 오염시키지 않는다. */
+div[data-screen-label="Infinite Canvas"]{
 /* ===== PRIMITIVE / color ===== */
 --color-white:#FFFFFF;--color-gray-050:#F5F4F9;--color-gray-300:#D9D9D9;--color-gray-500:#A5A5A5;--color-gray-800:#656565;--color-gray-950:#1C1B20;--color-ink-rgb:101,101,101;--color-red-500:#EA5147;
 /* ===== PRIMITIVE / font family ===== */
---font-sans:'Paperlogy',-apple-system,BlinkMacSystemFont,sans-serif;
+--font-sans:'KezPaperlogy',-apple-system,BlinkMacSystemFont,sans-serif;
 /* Mona는 라틴 전용 서브셋 — 한글 글리프는 Paperlogy가 이어받는다 */
---font-mono:'Mona','Paperlogy',ui-monospace,'SF Mono',Menlo,monospace;
+--font-mono:'KezMona','KezPaperlogy',ui-monospace,'SF Mono',Menlo,monospace;
 /* ===== SEMANTIC / color role ===== */
 --bg-canvas:var(--color-gray-050);--grid-line:var(--color-gray-300);
 /* editorial line(연필선 디바이더) 3단 위계: 레일 --line(강) / 가로 룰 --line-soft(중) / 컬럼 --line-grid(약) */
@@ -89,50 +90,50 @@
 --spring-dur:.9s;--spring-ease:linear(0,.13 5.6%,.35 11.1%,.56 16.7%,.71 22.2%,.82 27.8%,.89 33.3%,.94 38.9%,.962 44.4%,.978 50%,.988 55.6%,.996 66.7%,.999 77.8%,1);
 --draw-ease:cubic-bezier(0.6,0,0.6,1); /* 디바이더(레일·가로 룰) 드로우 이징 — --spring-ease와 짝을 이루는 모션 그룹 */
 }
-html,body{margin:0;padding:0;height:100%;overflow:hidden;background:var(--bg-canvas);overscroll-behavior:none}
-/* touch-action은 상속되지 않음 — 터치가 카드/패널 위에서 시작되면 브라우저가 pointercancel로 팬을 끊어버리므로 캔버스 내 전 요소에 지정 (폼 입력만 예외) */
+/* 문서의 html/body에는 손대지 않는다. 블록 자체가 호스트 안에서만 입력과 오버플로를 소유한다. */
 div[data-screen-label="Infinite Canvas"],div[data-screen-label="Infinite Canvas"] *{touch-action:none}
-div[data-screen-label="Infinite Canvas"] input,div[data-screen-label="Infinite Canvas"] textarea{touch-action:auto}
-a{color:var(--text-primary)}a:hover{color:var(--text-primary)}
-@keyframes ants{to{stroke-dashoffset:-70}}
-@keyframes backline{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.5)}}
-@keyframes backhead{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
-@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-@keyframes boxpopA{0%{transform:scale(.8);opacity:0}27%{opacity:0}65%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
-@keyframes boxpopB{0%{transform:scale(.8);opacity:0}27%{opacity:0}65%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
-@keyframes blink{0%,48%{opacity:1}49%,100%{opacity:0}}
+div[data-screen-label="Infinite Canvas"] input,div[data-screen-label="Infinite Canvas"] textarea,div[data-screen-label="Infinite Canvas"] button{touch-action:auto}
+div[data-screen-label="Infinite Canvas"] a{color:var(--text-primary)}div[data-screen-label="Infinite Canvas"] a:hover{color:var(--text-primary)}
+@keyframes kz-ants{to{stroke-dashoffset:-70}}
+@keyframes kz-backline{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.5)}}
+@keyframes kz-backhead{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+@keyframes kz-fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes kz-boxpopA{0%{transform:scale(.8);opacity:0}27%{opacity:0}65%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes kz-boxpopB{0%{transform:scale(.8);opacity:0}27%{opacity:0}65%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes kz-blink{0%,48%{opacity:1}49%,100%{opacity:0}}
 /* 호버 색 전환 — 카드 색을 인라인 style로 주는 구조라, :hover 클래스가 인라인을 이겨야 한다 */
 /* !important 필수: 카드 색·투명도를 인라인 style로 주는 구조라 클래스 셀렉터로는 이길 수 없다 */
-.hov-text:hover{color:var(--text-primary) !important}
+div[data-screen-label="Infinite Canvas"] .hov-text:hover{color:var(--text-primary) !important}
 /* 입력 칸의 면 — 셀이 이미 격자를 그리므로 필드는 비워 둔다. 인라인이 아니라 여기 두어야
    아래 .fld-well(빈 칸 해치)이 특정도로 이길 수 있다 (!important 없이 cascade로 해결) */
-.fld{background:transparent}
+div[data-screen-label="Infinite Canvas"] .fld{background:transparent}
 /* 메일 폼의 빈칸 채우기 글자 — 입력한 글자(--text-primary)보다 확실히 옅게. 브라우저 기본 투명도는 끈다 */
-.fld::placeholder{color:var(--text-secondary);opacity:1}
+div[data-screen-label="Infinite Canvas"] .fld::placeholder{color:var(--text-secondary);opacity:1}
 /* 폼 셀 한 줄 — 경계선은 인라인이 아니라 여기 둔다. 인라인 shorthand로 두면 아래 :focus-within이
    특정도에서 못 이겨 선택 표시가 죽는다 (!important 없이 cascade로 해결) */
-.kz-row{border-top:1px solid var(--grid-line)}
+div[data-screen-label="Infinite Canvas"] .kz-row{border-top:1px solid var(--grid-line)}
 /* 입력 중인 칸 = 선택된 셀. 캔버스가 선택을 accent로 표시하는 규약을 폼 셀에도 그대로 적용한다 */
-.kz-row:focus-within{border-top-color:var(--accent)}
+div[data-screen-label="Infinite Canvas"] .kz-row:focus-within{border-top-color:var(--accent)}
 /* 보내기 = 치수 칩. 측정 라벨과 같은 mono·accent에 각진 1px 테두리(태그 칩과 같은 골격) */
-.kz-send{display:inline-flex;align-items:center;border:1px solid var(--accent);color:var(--accent);background:var(--surface);padding:8px 14px;font:var(--type-btn);white-space:nowrap;cursor:pointer;user-select:none;transition:background 160ms ease-out,color 160ms ease-out}
-.kz-send:hover{background:var(--accent);color:var(--surface)}
+div[data-screen-label="Infinite Canvas"] .kz-send{display:inline-flex;align-items:center;border:1px solid var(--accent);border-radius:0;color:var(--accent);background:var(--surface);padding:8px 14px;font:var(--type-btn);white-space:nowrap;cursor:pointer;user-select:none;transition:background 160ms ease-out,color 160ms ease-out;-webkit-appearance:none;appearance:none}
+div[data-screen-label="Infinite Canvas"] .kz-send:hover{background:var(--accent);color:var(--surface)}
+div[data-screen-label="Infinite Canvas"] .kz-send:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 /* 화면 밖 구역의 무한 반복 애니(행진개미·타이핑 커서)를 멈춘다 — IntersectionObserver가 토글.
    animation-play-state는 상속되지 않으므로 자손 전체를 후손 선택자로 잡는다. */
 /* !important 필수: 개별 애니의 play-state 선언을 전부 이겨야 하는 킬스위치라 우선순위 조정으로 대체 불가 */
-.anim-off *{animation-play-state:paused !important}
+div[data-screen-label="Infinite Canvas"] .anim-off *{animation-play-state:paused !important}
 /* 카드 제도 도면 크롬 — 프레임 테두리·주석 바. 호버하면 테두리·주석·제목이 accent로 전환된다.
    주석 바(.kz-card-bar)는 이제 Contact 폼 시트에만 남았다 — 카드·카탈로그 패널은 그 자리를
    이미지에 내주고 치수·분류를 캡션 줄로 내렸다(2026-08-11).
    색은 인라인이 아니라 이 클래스에만 둔다 (인라인이면 :hover가 못 이겨 !important가 필요해진다). */
 /* 면 쉐도우는 별도 div가 아니라 카드 컴포지션 그룹(프레임) 자체의 box-shadow — 솔리드 오프셋 슬래브.
    내부 요소에 라인 사각형을 따로 그려 넣던 조립(2026-08-04 이전)은 그림자가 겉돌아 폐기. */
-.kz-card-frame{border:1px solid var(--text-primary);box-shadow:var(--bp-sheet) var(--bp-sheet) 0 var(--bp-sheet-fill);transition:border-color 160ms ease-out}
-.kz-card-frame:hover{border-color:var(--accent)}
-.kz-card-bar{border-bottom:1px solid var(--line-soft);color:var(--text-secondary);transition:color 160ms ease-out,border-color 160ms ease-out}
-.kz-card-frame:hover .kz-card-bar{color:var(--accent);border-bottom-color:var(--accent)}
-.kz-card-frame:hover .kz-card-title{color:var(--accent)}
+div[data-screen-label="Infinite Canvas"] .kz-card-frame{border:1px solid var(--text-primary);box-shadow:var(--bp-sheet) var(--bp-sheet) 0 var(--bp-sheet-fill);transition:border-color 160ms ease-out}
+div[data-screen-label="Infinite Canvas"] .kz-card-frame:hover{border-color:var(--accent)}
+div[data-screen-label="Infinite Canvas"] .kz-card-bar{border-bottom:1px solid var(--line-soft);color:var(--text-secondary);transition:color 160ms ease-out,border-color 160ms ease-out}
+div[data-screen-label="Infinite Canvas"] .kz-card-frame:hover .kz-card-bar{color:var(--accent);border-bottom-color:var(--accent)}
+div[data-screen-label="Infinite Canvas"] .kz-card-frame:hover .kz-card-title{color:var(--accent)}
 /* 태그 칩 — 레퍼런스 Tag(S) 기반 1px 잉크 테두리, 본문 서체. 라벨 스케일에 맞춘 소곡률(--radius-tag,
    검수 반영 2026-08-11 — 이전에는 각진 테두리였다). 카드 호버 시 테두리·글자가 같이 accent로 */
-.kz-tag{display:inline-flex;align-items:center;border:1px solid var(--text-primary);border-radius:var(--radius-tag);color:var(--text-primary);padding:1px 5px;font:var(--type-card-meta);white-space:nowrap;transition:border-color 160ms ease-out,color 160ms ease-out}
-.kz-card-frame:hover .kz-tag{border-color:var(--accent);color:var(--accent)}
+div[data-screen-label="Infinite Canvas"] .kz-tag{display:inline-flex;align-items:center;border:1px solid var(--text-primary);border-radius:var(--radius-tag);color:var(--text-primary);padding:1px 5px;font:var(--type-card-meta);white-space:nowrap;transition:border-color 160ms ease-out,color 160ms ease-out}
+div[data-screen-label="Infinite Canvas"] .kz-card-frame:hover .kz-tag{border-color:var(--accent);color:var(--accent)}
